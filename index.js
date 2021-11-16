@@ -59,14 +59,7 @@ async function run(){
             res.json(result);
         })
 
-        // USER
-        app.post('/users', async (req, res) =>{
-            const file = req.files;
-            const user = req.body;
-            const result = await usersCollection.insertOne(user);
-            res.json(result);
-        })
-
+        
         app.post('/orders', async (req, res) => {
             const order = req.body;
             console.log(order)
@@ -88,14 +81,14 @@ async function run(){
             const products = await cursor.toArray();
             res.json(products);
         });
-
+        
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id)};
             const result = await productsCollection.findOne(query);
             res.json(result);
         })
-
+        
         app.get('/orders', async (req, res) => {
             const email = req.query.email;
             console.log(email);
@@ -104,16 +97,37 @@ async function run(){
             const orders = await cursor.toArray();
             res.json(orders);
         })
-
+        
         // Get Reviews
         app.get('/reviews', async (req, res) => {
             const cursor = reviewsCollection.find({});
             const reviews = await cursor.toArray();
             res.json(reviews);
         });
+        
+        
+        // Users
+
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            let isAdmin = false;
+            if (user?.role === 'admin') {
+                isAdmin = true;
+            }
+            res.json({ admin: isAdmin });
+        })
+        
+
+        app.post('/users', async (req, res) =>{
+            const file = req.files;
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            res.json(result);
+        })
 
 
-        // PUT 
         app.put('/users/admin', verifyToken, async (req, res) => {
             const user = req.body;
             const requester = req.decodedEmail;
