@@ -118,7 +118,7 @@ async function run(){
             }
             res.json({ admin: isAdmin });
         })
-        
+
 
         app.post('/users', async (req, res) =>{
             const file = req.files;
@@ -166,7 +166,7 @@ async function run(){
 
     }
     finally{
-        // await client.close();
+        // await client.close(); 
     }
 }
 run().catch(console.dir);
