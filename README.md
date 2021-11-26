@@ -20,5 +20,5 @@ React.js, Node.js, Mongodb, Express, Evndot, Cors, Firebase, Material UI, Bootst
 ##### Live Site: [https://steam-land-69998.web.app](https://steam-land-69998.web.app/).
 
 
-#### Client Side Code: https://github.com/programming-hero-web-course-4/niche-website-client-side-Mdashik-pradhan
+#### Client Side Code: https://github.com/Mdashik-pradhan/steam-land
 
